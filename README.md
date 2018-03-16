@@ -4,6 +4,11 @@ This program creates SSTables given the cassandra schema definition and the data
 
 # How to use this?
 
+This example program creates SSTables for a specific column family.
+
+   * Copy the CSV data dump to the input folder.
+   * Copy the CQL scolumn family schema definition containing .cql file to resources folder.
+
 Create the artefacts using Maven.
 ```sh
     $ cd CSVtoSSTable
