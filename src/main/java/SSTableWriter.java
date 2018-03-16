@@ -6,6 +6,8 @@ import org.apache.cassandra.config.Config;
 import org.apache.cassandra.dht.Murmur3Partitioner;
 import org.apache.cassandra.exceptions.InvalidRequestException;
 import org.apache.cassandra.io.sstable.CQLSSTableWriter;
+
+import com.sun.org.apache.xpath.internal.SourceTree;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
@@ -23,8 +25,16 @@ public class SSTableWriter {
 									String column_family,
 										String schema_dir) {
 		this.IN = csv_dir;
-        this.OUT = sstable_Dir + File.separator + keyspace + File.separator + column_family ;
-		new File(OUT).mkdirs();
+		this.OUT = sstable_Dir + File.separator + keyspace + File.separator + column_family;
+		
+		try{
+			new File(OUT).mkdirs();
+		}
+		catch(Exception e){
+			System.out.println("Couldn't create output folder!");
+			e.printStackTrace();
+		}
+		
 		this.SCHEMA = readSchemaFile(schema_dir);
 		this.keyspace = keyspace;
 		this.column_family = column_family;
